@@ -1,0 +1,64 @@
+Project:            
+Testsystem:         
+Comment:            NA
+
+KinGUI Version: 1.1
+
+Input Data:         C:\Documents and Settings\ws_rajo\My Documents\R\kinfit.package\kinfit\inst\doc\KinGUI\F_water_KinGUI.txt
+
+# =================================
+# Results of the kinetic evaluation
+# =================================
+
+# ---------------------------------
+# Initial values
+# ---------------------------------
+                    Initial Value    Lower Bound      Upper Bound      
+        Parent_M(0):   100.0000           0.0000              Inf      
+          Parent_k1:     0.1000           0.0000              Inf      
+          Parent_k2:     0.0100           0.0000              Inf      
+          Parent_tb:     3.0000           0.0000              Inf      
+          Sink_M(0):     0.0000           0.0000              Inf      
+
+# ---------------------------------
+# Chi2 error estimation
+# ---------------------------------
+                     Parent      Sink
+        Chi2Err%:    1.6558       NaN
+   Kinetic Model:        hs      sink
+
+# ---------------------------------
+# Parameter estimation
+# ---------------------------------
+
+    Parameter   Estimate     St.Dev   Prob > t
+    Parent_k1     0.0356     0.0022   8.3e-006
+    Parent_k2     0.0955     0.0041   1.4e-006
+    Parent_tb    12.8509     0.6443   2.9e-006
+   Parent_FFS     1.0000
+  Parent_M(0)    95.1656     0.8209
+    Sink_M(0)     0.0000
+
+# ---------------------------------
+# DT50 and DT90 values
+# ---------------------------------
+                       Parent         Sink
+           DT50:      15.3239          NaN
+           DT90:      32.1824          NaN
+  Kinetic model:           hs         sink
+
+# ---------------------------------
+# Measured vs. predicted values
+# ---------------------------------
+   Time            Compartment Parent              Compartment Sink
+         measured predicted  residual  measured predicted  residual
+    0.0   95.6000   95.1656    0.4344       NaN    0.0000       NaN
+    3.0   84.7000   85.5346   -0.8346       NaN    9.6310       NaN
+    7.0   74.6000   74.1920    0.4080       NaN   20.9736       NaN
+   14.0   54.1000   53.9934    0.1066       NaN   41.1723       NaN
+   28.0   13.5000   14.1869   -0.6869       NaN   80.9788       NaN
+   43.0    4.3000    3.3882    0.9118       NaN   91.7774       NaN
+   56.0    2.0000    0.9794    1.0206       NaN   94.1862       NaN
+   70.0    0.5000    0.2574    0.2426       NaN   94.9083       NaN
+  100.0    0.8000    0.0147    0.7853       NaN   95.1510       NaN
+

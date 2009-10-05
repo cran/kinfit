@@ -1,0 +1,25 @@
+library(kinfit)
+data(FOCUS_2006_A)
+fits <- kinfit(FOCUS_2006_A, kinmodels = c("SFO", "HS"))
+print(kinresults(fits)$results, digits=5)
+print(kinresults(fits)$stats, digits=5)
+
+data(FOCUS_2006_B)
+fits <- kinfit(FOCUS_2006_B, kinmodels = c("SFO", "FOMC", "DFOP"))
+print(kinresults(fits)$results, digits=5)
+print(kinresults(fits)$stats, digits=5)
+
+data(FOCUS_2006_C)
+fits <- kinfit(FOCUS_2006_C, kinmodels = c("SFO", "FOMC", "DFOP"))
+print(kinresults(fits)$results, digits=5)
+print(kinresults(fits)$stats, digits=5)
+
+data(FOCUS_2006_D)
+fits <- kinfit(FOCUS_2006_D, kinmodels = c("SFO", "FOMC"))
+print(kinresults(fits)$results, digits=5)
+print(kinresults(fits)$stats, digits=5)
+
+data(FOCUS_2006_E)
+fits <- kinfit(FOCUS_2006_E, kinmodels = c("SFO", "FOMC", "DFOP"))
+print(kinresults(fits)$results, digits=5)
+print(kinresults(fits)$stats, digits=5)

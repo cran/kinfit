@@ -1,0 +1,79 @@
+
+R version 2.10.0 (2009-10-26)
+Copyright (C) 2009 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(kinfit)
+> data(FOCUS_2006_A)
+> fits <- kinfit(FOCUS_2006_A, kinmodels = c("SFO", "HS"))
+> print(kinresults(fits)$results, digits=5)
+      DT50   DT90
+SFO 18.624 61.868
+HS  20.294 49.854
+> print(kinresults(fits)$stats, digits=5)
+    n.times df mean.means      RSS  err.min
+SFO       8  6     50.054 221.8078 0.083848
+HS        8  4     50.054   6.6927 0.016766
+> 
+> data(FOCUS_2006_B)
+> fits <- kinfit(FOCUS_2006_B, kinmodels = c("SFO", "FOMC", "DFOP"))
+> print(kinresults(fits)$results, digits=5)
+       DT50   DT90
+SFO  8.8686 29.461
+FOMC 8.6834 30.754
+DFOP 8.6829 30.789
+> print(kinresults(fits)$stats, digits=5)
+     n.times df mean.means    RSS  err.min
+SFO        8  6     35.015 30.656 0.044555
+FOMC       8  5     35.015 28.583 0.045886
+DFOP       8  4     35.015 28.550 0.049527
+> 
+> data(FOCUS_2006_C)
+> fits <- kinfit(FOCUS_2006_C, kinmodels = c("SFO", "FOMC", "DFOP"))
+> print(kinresults(fits)$results, digits=5)
+       DT50    DT90
+SFO  2.2647  7.5232
+FOMC 1.7852 15.1479
+DFOP 1.8869 21.2507
+> print(kinresults(fits)$stats, digits=5)
+     n.times df mean.means      RSS  err.min
+SFO        9  7     23.589 196.5334 0.158440
+FOMC       9  6     23.589  31.0509 0.066568
+DFOP       9  5     23.589   4.3627 0.026621
+> 
+> data(FOCUS_2006_D)
+> fits <- kinfit(FOCUS_2006_D, kinmodels = c("SFO", "FOMC"))
+> print(kinresults(fits)$results, digits=5)
+       DT50   DT90
+SFO  7.0776 23.511
+FOMC 6.9350 24.044
+> print(kinresults(fits)$stats, digits=5)
+     n.times df mean.means    RSS  err.min
+SFO        9  7     39.523 207.63 0.064524
+FOMC       9  6     39.523 205.45 0.067802
+> 
+> data(FOCUS_2006_E)
+> fits <- kinfit(FOCUS_2006_E, kinmodels = c("SFO", "FOMC", "DFOP"))
+> print(kinresults(fits)$results, digits=5)
+       DT50    DT90
+SFO  2.2647  7.5232
+FOMC 1.7852 15.1479
+DFOP 1.8869 21.2507
+> print(kinresults(fits)$stats, digits=5)
+     n.times df mean.means      RSS  err.min
+SFO        9  7     23.589 196.5334 0.158440
+FOMC       9  6     23.589  31.0509 0.066568
+DFOP       9  5     23.589   4.3627 0.026621
+> 
