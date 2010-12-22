@@ -15,7 +15,7 @@ Function to initialise an object representing a kinetic experiment or trial.
   \item{type}{ The type of experiment or trial, optionally with an ID }
   \item{system}{ System name. Important if several systems were used, e.g. several soils. }
   \item{layers}{ Optional specification of the layer names in a field trial. }
-  \item{sampling_times}{ Optional specification of the sampling time pionts. }
+  \item{sampling_times}{ Optional specification of the sampling time points. }
 }
 \value{
   A list containing the specified information.

@@ -35,7 +35,7 @@ An optional comment that will be integrated in the header of the KinGUI input fi
 The function is called for its side effect, namely the generation of a text file.
 }
 \references{
-Schäfer D, Kikolasch M, Rainbird P and Harvey B (2007). KinGUI: a new kinetic software tool for evaluations according to FOCUS degradation kinetics. In: Del Re AAM, Capri E, Fragoulis G and Trevisan M (Eds.). Proceedings of the XIII Symposium Pesticide Chemistry, Piacenza, 2007, p. 916-923.
+Schäfer D, Mikolasch M, Rainbird P and Harvey B (2007). KinGUI: a new kinetic software tool for evaluations according to FOCUS degradation kinetics. In: Del Re AAM, Capri E, Fragoulis G and Trevisan M (Eds.). Proceedings of the XIII Symposium Pesticide Chemistry, Piacenza, 2007, p. 916-923.
 }
 \note{
 The KinGUI software tool was announced to be freely available on CD from the main author of the paper cited above, Dieter Schäfer <dieter.schaefer@bayercropscience.com>.

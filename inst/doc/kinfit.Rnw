@@ -1,3 +1,4 @@
+% $Id: kinfit.Rnw 59 2010-07-28 12:29:15Z jranke $
 %%\VignetteIndexEntry{Routines for fitting kinetic models to chemical degradation data}
 %%VignetteDepends{nls}
 %%\usepackage{Sweave}

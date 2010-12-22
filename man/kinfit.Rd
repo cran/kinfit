@@ -9,12 +9,12 @@ Fit kinetic models to chemical degradation data
   2006 are fitted to a given dataframe of chemical degradation data.
 }
 \usage{
-kinfit(kindata, kinmodels = c("SFO"), parent.0.user = NA, 
+kinfit(kindata, kinmodels = c("SFO"), parent.0.user = NA, parent.0.fixed = FALSE,
   start.SFO = list(parent.0 = NA, k = NA), 
   start.FOMC = list(parent.0 = NA, alpha = NA, beta = NA), 
   start.DFOP = list(parent.0 = NA, k1 = NA, k2 = NA, g = NA),
   start.HS = list(parent.0 = NA, k1 = NA, k2 = NA, tb = NA),
-  algorithm = "port")
+  algorithm = "default")
 }
 \arguments{
   \item{kindata}{
@@ -29,6 +29,11 @@ kinfit(kindata, kinmodels = c("SFO"), parent.0.user = NA,
   \item{parent.0.user}{
     The user can give a starting estimate for parent.0 here, overriding other
     potential sources for starting values as specified below.
+  }
+  \item{parent.0.fixed}{
+    If TRUE, the initial value for the observed value will be fixed to the 
+    value specified by \code{parent.0.user}. Only implemented for the 
+    \code{\link{SFO}} model.
   }
   \item{start.SFO}{
     A list of starting parameters for fitting the \code{\link{SFO}} model,
