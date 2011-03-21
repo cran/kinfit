@@ -1,4 +1,4 @@
-# $Id: kinreport.R 82 2010-10-28 06:16:48Z jranke $
+# $Id: kinreport.R 89 2010-12-22 11:55:34Z jranke $
 
 # Copyright (C) 2008-2010 Johannes Ranke
 # Contact: mkin-devel@lists.berlios.de

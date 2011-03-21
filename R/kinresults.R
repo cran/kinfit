@@ -1,6 +1,6 @@
-# $Id: kinresults.R 82 2010-10-28 06:16:48Z jranke $
+# $Id: kinresults.R 92 2011-03-08 12:14:30Z jranke $
 
-# Copyright (C) 2008-2010 Johannes Ranke
+# Copyright (C) 2008-2011 Johannes Ranke
 # Contact: mkin-devel@lists.berlios.de
 
 # This file is part of the R package kinfit
@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU General Public License along with
 # this program. If not, see <http://www.gnu.org/licenses/>
 
-kinresults <- function(kinfits, alpha = 0.05, SFORB=TRUE)
+kinresults <- function(kinfits, alpha = 0.05, DTmax = 1000, SFORB=TRUE)
 {
 	kindata <- data.frame(
     t = kinfits[[1]]$model$t, 
@@ -81,16 +81,18 @@ kinresults <- function(kinfits, alpha = 0.05, SFORB=TRUE)
 
 			df[[kinmodel]] = n.times - n.parms
 			RSS[[kinmodel]] = sum(summary(m)$residuals^2)
-			DT50[[kinmodel]] = switch(kinmodel,
+			DT50.o = switch(kinmodel,
         SFO = log(2)/coef(m)[["k"]],
 				FOMC = coef(m)[["beta"]] * (2^(1/coef(m)[["alpha"]]) - 1),
-				HS = optimize(f[[kinmodel]], c(0, max(kindata$t)), x=50)$minimum,
-				DFOP = optimize(f[[kinmodel]], c(0, max(kindata$t)), x=50)$minimum)
-			DT90[[kinmodel]] = switch(kinmodel,
+				HS = optimize(f[[kinmodel]], c(0, DTmax), x=50)$minimum,
+				DFOP = optimize(f[[kinmodel]], c(0, DTmax), x=50)$minimum)
+      DT50[[kinmodel]] = ifelse(abs(DT50.o - DTmax) < 0.1, NA, DT50.o)
+			DT90.o = switch(kinmodel,
 				SFO = log(10)/coef(m)[["k"]],
 				FOMC = coef(m)[["beta"]] * (10^(1/coef(m)[["alpha"]]) - 1),
-				HS = optimize(f[[kinmodel]], c(0, max(kindata$t)), x=90)$minimum,
-				DFOP = optimize(f[[kinmodel]], c(0, max(kindata$t)), x=90)$minimum)
+				HS = optimize(f[[kinmodel]], c(0, DTmax), x=90)$minimum,
+				DFOP = optimize(f[[kinmodel]], c(0, DTmax), x=90)$minimum)
+      DT90[[kinmodel]] = ifelse(abs(DT90.o - DTmax) < 0.1, NA, DT90.o)
 			err.min[[kinmodel]] <- kinerrmin(kinfits, kinmodel)
 		}
 	}

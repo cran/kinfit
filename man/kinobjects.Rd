@@ -15,7 +15,7 @@ Function to initialise several objects representing a kinetic experiment or tria
   \item{type}{ The type of experiment or trial, optionally with an ID }
   \item{systems}{ An array of the system names }
   \item{layers}{ Optional specification of the layer names in a field trial. }
-  \item{sampling_times}{ Optional specification of the sampling time pionts. }
+  \item{sampling_times}{ Optional specification of the sampling time points. }
 }
 \value{
   A list of lists containing the specified information.
