@@ -8,7 +8,7 @@ Creates a plot of the residual for specified kinetic fits
 Function to create a residual plot for a specified fitted model
 }
 \usage{
-kinresplot(kinobject, kinmodel, xlab = "Time [days]", ylab = "Residual [\% of applied radioactivity]", maxabs = "auto")
+  kinresplot(kinobject, kinmodel, xlab = "Time [days]", ylab = "Residual [\% of applied radioactivity]", maxabs = "auto")
 }
 \arguments{
   \item{kinobject}{

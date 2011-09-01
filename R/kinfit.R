@@ -1,4 +1,4 @@
-# $Id: kinfit.R 82 2010-10-28 06:16:48Z jranke $
+# $Id: kinfit.R 116 2011-06-14 08:46:47Z kati $
 
 # Copyright (C) 2008-2010 Johannes Ranke
 # Contact: mkin-devel@lists.berlios.de
@@ -27,22 +27,26 @@ kinfit <- function(kindata, kinmodels = c("SFO"),
 	start.HS = list(parent.0 = NA, k1 = NA, k2 = NA, tb = NA),
         algorithm = "default")
 {
+	
 	kindata <- subset(kindata, !is.na(kindata$parent))
 	kinfits <- list()
 
 	if (!is.na(parent.0.user)) {
 		start.SFO$parent.0 = parent.0.user
 		start.FOMC$parent.0 = parent.0.user
+		start.DFOP$parent.0 = parent.0.user
+		start.HS$parent.0 = parent.0.user
 	}
 
 	lmlogged = lm(log(parent) ~ t, data = kindata)
+      k.est = -coef(lmlogged)[["t"]]
 
 	for (kinmodel in kinmodels)
 	{
 
 		if (kinmodel == "SFO") {
 			if (is.na(start.SFO$parent.0)) {
-        start.SFO$parent.0 = max(kindata$parent)
+        			start.SFO$parent.0 = max(kindata$parent)
 			}
 			if (is.na(start.SFO$k)) {
 				start.SFO$k = - coef(lmlogged)[["t"]]
@@ -62,13 +66,11 @@ kinfit <- function(kindata, kinmodels = c("SFO"),
               start = start.SFO,
               algorithm = algorithm), silent=TRUE)
         }
+      k.est = coef(kinfits$SFO)[["k"]]
 		}	
-		k.est = ifelse(is.na(coef(kinfits$SFO)[["k"]]),
-			-coef(lmlogged)[["t"]],
-			coef(kinfits$SFO)[["k"]])
 		if (kinmodel == "FOMC") {
 			if (is.na(start.FOMC$parent.0)) {
-        start.FOMC$parent.0 = max(kindata$parent)
+       			start.FOMC$parent.0 = max(kindata$parent)
 			}
 			if (is.na(start.FOMC$alpha)) {
 				start.FOMC$alpha = 1
@@ -76,15 +78,29 @@ kinfit <- function(kindata, kinmodels = c("SFO"),
 			if (is.na(start.FOMC$beta)) {
 				start.FOMC$beta = start.FOMC$alpha / k.est 
 			}
-			kinfits[[kinmodel]] = try(
-				nls(parent ~ FOMC(t, parent.0, alpha, beta),
-					data = kindata, model = TRUE,
-					start = start.FOMC,
-          algorithm = algorithm), silent=TRUE)
+			
+      		if (parent.0.fixed)
+      		{
+        			start.FOMC = list(alpha = start.FOMC$alpha, beta = start.FOMC$beta)
+				
+        			kinfits[[kinmodel]] = try(
+         			nls(parent ~ FOMC(t, parent.0.user, alpha, beta),
+           				 data = kindata, model = TRUE,
+          				  start = start.FOMC,
+            			algorithm = algorithm), silent=TRUE)
+
+      		} else {
+        			kinfits[[kinmodel]] = try(
+          			nls(parent ~ FOMC(t, parent.0, alpha, beta),
+            		data = kindata, model = TRUE,
+           			start = start.FOMC,
+           			algorithm = algorithm), silent=TRUE)
+
+		      }
 		}	
 		if (kinmodel == "DFOP") {
 			if (is.na(start.DFOP$parent.0)) {
-        start.DFOP$parent.0 = max(kindata$parent)
+        			start.DFOP$parent.0 = max(kindata$parent)
 			}
 			if (is.na(start.DFOP$k1)) {
 				start.DFOP$k1 = k.est * 2
@@ -95,15 +111,26 @@ kinfit <- function(kindata, kinmodels = c("SFO"),
 			if (is.na(start.DFOP$g)) {
 				start.DFOP$g = 0.5
 			}
-			kinfits[[kinmodel]] = try(
+			if (parent.0.fixed)
+      		{
+				start.DFOP = list(k1 = start.DFOP$k1, k2 = start.DFOP$k2, g = start.DFOP$g)
+
+				kinfits[[kinmodel]] = try(
+				nls(parent ~ DFOP(t, parent.0.user, k1, k2, g),
+					data = kindata, model = TRUE,
+					start = start.DFOP,
+          				algorithm = algorithm), silent=TRUE)
+			}else{
+				kinfits[[kinmodel]] = try(
 				nls(parent ~ DFOP(t, parent.0, k1, k2, g),
 					data = kindata, model = TRUE,
 					start = start.DFOP,
-          algorithm = algorithm), silent=TRUE)
+          				algorithm = algorithm), silent=TRUE)
+			}
 		}	
 		if (kinmodel == "HS") {
 			if (is.na(start.HS$parent.0)) {
-        start.HS$parent.0 = max(kindata$parent)
+        			start.HS$parent.0 = max(kindata$parent)
 			}
 			if (is.na(start.HS$k1)) {
 				start.HS$k1 = k.est
@@ -114,11 +141,24 @@ kinfit <- function(kindata, kinmodels = c("SFO"),
 			if (is.na(start.HS$tb)) {
 				start.HS$tb = 0.05 * max(kindata$t)
 			}
-			kinfits[[kinmodel]] = try(
+			
+			if (parent.0.fixed)
+      		{		
+				
+				start.HS = list(k1 = start.HS$k1, k2 = start.HS$k2, tb = start.HS$tb)	
+
+				kinfits[[kinmodel]] = try(
+				nls(parent ~ HS(t, parent.0.user, k1, k2, tb),
+					data = kindata, model = TRUE,
+					start = start.HS,
+          				algorithm = algorithm), silent=TRUE)
+			}else{
+				kinfits[[kinmodel]] = try(
 				nls(parent ~ HS(t, parent.0, k1, k2, tb),
 					data = kindata, model = TRUE,
 					start = start.HS,
-          algorithm = algorithm), silent=TRUE)
+          				algorithm = algorithm), silent=TRUE)
+			}
 		}	
 	}
 	return(kinfits)		

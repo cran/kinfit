@@ -8,7 +8,7 @@ Creates a plot of the kinetic fits
 Function to create a plot for a set of fitted models
 }
 \usage{
-kinplot(kinobject, xlab = "Time [days]", ylab = "Parent [\% of applied radioactivity]", ylim = c("auto", "auto"), lpos = "topright")
+kinplot(kinobject, main = "", xlab = "Time [days]", ylab = "Parent [\% of applied radioactivity]", ylim = c("auto", "auto"), lpos = "topright")
 }
 \arguments{
   \item{kinobject}{
@@ -26,6 +26,7 @@ kinplot(kinobject, xlab = "Time [days]", ylab = "Parent [\% of applied radioacti
 	Optionally also
 	the label position of the test compound (\code{label}) and
 	the source of the data (\code{source}). }
+  \item{main}{ Title. }
   \item{xlab}{ Label for the x axis. }
   \item{ylab}{ Label for the y axis. }
   \item{ylim}{ An array of length two holding the range for values on the y axis or "auto". }

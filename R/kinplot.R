@@ -1,4 +1,4 @@
-# $Id: kinplot.R 82 2010-10-28 06:16:48Z jranke $
+# $Id: kinplot.R 117 2011-06-14 08:52:14Z kati $
 
 # Copyright (C) 2008-2010 Johannes Ranke
 # Contact: mkin-devel@lists.berlios.de
@@ -19,6 +19,7 @@
 # this program. If not, see <http://www.gnu.org/licenses/>
 
 kinplot <- function(kinobject, 
+	main = "",
 	xlab = "Time [days]", ylab = "Parent [% of applied radioactivity]",
         ylim = c("auto", "auto"),
 	lpos = "topright")
@@ -30,14 +31,15 @@ kinplot <- function(kinobject,
   ylim <- as.numeric(ylim)
         
 	plot(kindata$t, kindata$parent,
+	  main = main,
 	  xlab = xlab,
 	  ylab = ylab,
 	  ylim = ylim
-        )
+  )
 	n.m <- length(kinfits)
 	colors <- ltys <- 1:n.m
 	names(colors) <- names(ltys) <- names(kinfits)
-        ltext <- paste(kinobject$parent, "measured")
+  ltext <- paste(kinobject$parent, "measured")
 	for (kinmodel in names(kinfits))
 	{
 		m = kinfits[[kinmodel]]
@@ -47,9 +49,29 @@ kinplot <- function(kinobject,
           SFO = lines(
               t <- seq(min(kindata$t), max(kindata$t), length.out=500),
               predict(m, 
-              newdata = data.frame(t),
+              newdata = data.frame(t)),
               col = colors[[kinmodel]],
-              type = ltys[[kinmodel]])))
+              lty = ltys[[kinmodel]]),
+          FOMC = lines(
+              t <- seq(min(kindata$t), max(kindata$t), length.out=500),
+              predict(m, 
+              newdata = data.frame(t)),
+              col = colors[[kinmodel]],
+              lty = ltys[[kinmodel]]), 
+ 	    HS = lines(
+              t <- seq(min(kindata$t), max(kindata$t), length.out=500),
+              predict(m, 
+              newdata = data.frame(t)),
+              col = colors[[kinmodel]],
+              lty = ltys[[kinmodel]]), 
+          DFOP = lines(
+              t <- seq(min(kindata$t), max(kindata$t), length.out=500),
+              predict(m, 
+              newdata = data.frame(t)),
+              col = colors[[kinmodel]],
+              lty = ltys[[kinmodel]])
+		)
+        ltext <- c(ltext, paste("Fitted", kinmodel, "model"))
       } else {
         switch(kinmodel,
           SFO = curve(SFO(x, 
@@ -81,10 +103,10 @@ kinplot <- function(kinobject,
             from = min(kindata$t), to = max(kindata$t), add=TRUE,
             col = colors[[kinmodel]],
             lty = ltys[[kinmodel]]))
-            ltext <- c(ltext, paste("Fitted", kinmodel, "model"))
+        ltext <- c(ltext, paste("Fitted", kinmodel, "model"))
       }
 		} else {
-            ltext <- c(ltext, paste(kinmodel, "model failed"))
+        ltext <- c(ltext, paste(kinmodel, "model failed"))
             ltys[[kinmodel]] <- NA
 		} 
 	}

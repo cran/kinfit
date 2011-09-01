@@ -81,7 +81,7 @@ FOMC 6.9350 24.044
 > print(kinresults(fits)$stats, digits=5)
      n.times df mean.means    RSS  err.min
 SFO        9  7     39.523 207.63 0.064524
-FOMC       9  6     39.523 205.45 0.067802
+FOMC       9  6     39.523 205.45 0.067792
 > 
 > data(FOCUS_2006_E)
 > fits <- kinfit(FOCUS_2006_E, kinmodels = c("SFO", "FOMC", "DFOP"))

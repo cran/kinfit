@@ -1,4 +1,4 @@
-# $Id: kinresplot.R 80 2010-10-27 12:28:27Z jranke $
+# $Id: kinresplot.R 106 2011-05-12 10:55:37Z jranke $
 
 # Copyright (C) 2008-2010 Johannes Ranke
 # Contact: mkin-devel@lists.berlios.de
@@ -25,7 +25,7 @@ kinresplot <- function(kinobject, kinmodel,
 	m <- kinobject$fits[[kinmodel]]
 	t <- m$model$t
 	residuals <- residuals(m)
-	if (maxabs == "auto") maxabs = max(abs(residuals))
+	if (maxabs == "auto") maxabs = max(abs(residuals), na.rm = TRUE)
 	plot(t, residuals,
 		xlab = xlab,
 		ylab = ylab,
