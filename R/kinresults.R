@@ -1,4 +1,4 @@
-# $Id: kinresults.R 116 2011-06-14 08:46:47Z kati $
+# $Id: kinresults.R 123 2011-11-01 12:26:41Z jranke $
 
 # Copyright (C) 2008-2011 Johannes Ranke
 # Contact: mkin-devel@lists.berlios.de
@@ -27,7 +27,7 @@ kinresults <- function(kinfits, alpha = 0.05, DTmax = 1000, SFORB=TRUE)
 	kindata.means.mean <- mean(kindata.means$parent, na.rm=TRUE)
 	n.times <- length(kindata.means$parent)
 	parms <- list()
-	df <- err.min <- RSS <- vector()
+	df <- err.min <- R2 <- RSS <- TSS <- RSS.means <- TSS.means <- vector()
 	DT50 <- DT90 <- vector()
 	f <- list()
 	
@@ -110,28 +110,36 @@ kinresults <- function(kinfits, alpha = 0.05, DTmax = 1000, SFORB=TRUE)
 
 			df[[kinmodel]] = n.times - n.parms
 			RSS[[kinmodel]] = sum(summary(m)$residuals^2)
+      TSS[[kinmodel]] = sum((m$model$parent - mean(m$model$parent))^2)
 	
 			DT50.o = switch(kinmodel,
-        			SFO = log(2)/coef(m)[["k"]],
+        SFO = log(2)/coef(m)[["k"]],
 				FOMC = coef(m)[["beta"]] * (2^(1/coef(m)[["alpha"]]) - 1),
 				HS = optimize(f[[kinmodel]], c(0, DTmax), x=50)$minimum,
 				DFOP = optimize(f[[kinmodel]], c(0, DTmax), x=50)$minimum)
 			
 			
-      		DT50[[kinmodel]] = ifelse(abs(DT50.o - DTmax) < 0.1, NA, DT50.o)
-			DT90.o = switch(kinmodel,
-				SFO = log(10)/coef(m)[["k"]],
-				FOMC = coef(m)[["beta"]] * (10^(1/coef(m)[["alpha"]]) - 1),
-				HS = optimize(f[[kinmodel]], c(0, DTmax), x=90)$minimum,
-				DFOP = optimize(f[[kinmodel]], c(0, DTmax), x=90)$minimum)
-      		DT90[[kinmodel]] = ifelse(abs(DT90.o - DTmax) < 0.1, NA, DT90.o)
-			err.min[[kinmodel]] <- kinerrmin(kinfits, kinmodel)
+      DT50[[kinmodel]] = ifelse(abs(DT50.o - DTmax) < 0.1, NA, DT50.o)
+      DT90.o = switch(kinmodel,
+          SFO = log(10)/coef(m)[["k"]],
+          FOMC = coef(m)[["beta"]] * (10^(1/coef(m)[["alpha"]]) - 1),
+          HS = optimize(f[[kinmodel]], c(0, DTmax), x=90)$minimum,
+          DFOP = optimize(f[[kinmodel]], c(0, DTmax), x=90)$minimum)
+      DT90[[kinmodel]] = ifelse(abs(DT90.o - DTmax) < 0.1, NA, DT90.o)
+
+      # Chi2 error level as defined in FOCUS kinetics (see ?kinerrmin)
+      err.min[[kinmodel]] <- kinerrmin(kinfits, kinmodel)
+
+      # Coefficient of determination calculated from residual sum of squares and totals sum of squares
+      # so this r2 is what is called model efficiency in FOCUS kinetics (2006), p. 99
+      R2[[kinmodel]] = 1 - RSS[[kinmodel]]/TSS[[kinmodel]]
+
 		}
 	}
 
 	stats <- data.frame(n.times = n.times, df = df, 
    	mean.means = kindata.means.mean, 
-		RSS = RSS, err.min = err.min)
+		RSS = RSS, err.min = err.min, R2 = R2)
 	results <- data.frame(DT50 = DT50, DT90 = DT90)
 	list(parms = parms, stats = stats, results = results)
 }

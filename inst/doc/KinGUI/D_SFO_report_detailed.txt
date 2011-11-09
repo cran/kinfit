@@ -1,0 +1,94 @@
+Project:            
+Testsystem:         
+Comment:            NA
+
+KinGUI Version: 1.1
+
+Input Data:         C:\Documents and Settings\jranke\My Documents\R\mkin.BerliOS\R_packages\kinfit\trunk\inst\doc\KinGUI\D_KinGUI.txt
+
+# =================================
+# Results of the kinetic evaluation
+# =================================
+
+# ---------------------------------
+# Initial values
+# ---------------------------------
+                    Initial Value    Lower Bound      Upper Bound      
+        Parent_M(0):   100.0000           0.0000              Inf      
+           Parent_k:     0.1000           0.0000              Inf      
+          Sink_M(0):     0.0000           0.0000              Inf      
+
+# ---------------------------------
+# Chi2 error estimation
+# ---------------------------------
+                          Parent      Sink       All
+  Number of data sets:         9         0         9
+ Number of parameters:         2         0         2
+   Degrees of Freedom:         7         0         7
+
+                          Parent      Sink       All
+
+                 RMSE:    3.6160       NaN    3.6160
+            Chi2Sigma:    2.5508       NaN    2.5508
+             Chi2Err%:    6.4539       NaN    6.4539
+
+# ---------------------------------
+# Parameter estimation
+# ---------------------------------
+
+   Degrees of Freedom:        16
+    Parameter   Estimate   Lower CI   Upper CI     St.Dev   Prob > t
+     Parent_k     0.0979     0.0877     0.1082     0.0048   3.8e-013
+   Parent_FFS     1.0000
+  Parent_M(0)    99.4442    95.5614   103.3271     1.8316
+    Sink_M(0)     0.0000
+
+# ---------------------------------
+# DT50 and DT90 values
+# ---------------------------------
+                       Parent         Sink
+           DT50:       7.0776          NaN
+           DT90:      23.5112          NaN
+  Kinetic model:          sfo         sink
+
+# ---------------------------------
+# Additional Statistics
+# ---------------------------------
+# Correlation and R-square of predicted vs. measured data
+               Parent       Sink       All
+       EF:     0.9919        NaN     0.9919
+ R-square:     0.9919        NaN     0.9919
+
+# Correlation matrix of parameters
+                  Parent_k     Parent_M
+     Parent_k       1.0000       0.5360
+     Parent_M       0.5360       1.0000
+
+# ---------------------------------
+# Measured vs. predicted values
+# ---------------------------------
+   Time            Compartment Parent              Compartment Sink
+         measured predicted  residual  measured predicted  residual
+    0.0   99.4600   99.4442    0.0158       NaN    0.0000       NaN
+    0.0  102.0400   99.4442    2.5958       NaN    0.0000       NaN
+    1.0   93.5000   90.1668    3.3332       NaN    9.2774       NaN
+    1.0   92.5000   90.1668    2.3332       NaN    9.2774       NaN
+    3.0   63.2300   74.1277  -10.8977       NaN   25.3165       NaN
+    3.0   68.9900   74.1277   -5.1377       NaN   25.3165       NaN
+    7.0   52.3200   50.1013    2.2187       NaN   49.3430       NaN
+    7.0   55.1300   50.1013    5.0287       NaN   49.3430       NaN
+   14.0   27.2700   25.2417    2.0283       NaN   74.2026       NaN
+   14.0   26.6400   25.2417    1.3983       NaN   74.2026       NaN
+   21.0   11.5000   12.7171   -1.2171       NaN   86.7272       NaN
+   21.0   11.6400   12.7171   -1.0771       NaN   86.7272       NaN
+   35.0    2.8500    3.2279   -0.3779       NaN   96.2163       NaN
+   35.0    2.9100    3.2279   -0.3179       NaN   96.2163       NaN
+   50.0    0.6900    0.7429   -0.0529       NaN   98.7013       NaN
+   50.0    0.6300    0.7429   -0.1129       NaN   98.7013       NaN
+   75.0    0.0500    0.0642   -0.0142       NaN   99.3800       NaN
+   75.0    0.0600    0.0642   -0.0042       NaN   99.3800       NaN
+  100.0       NaN    0.0055       NaN       NaN   99.4387       NaN
+  100.0       NaN    0.0055       NaN       NaN   99.4387       NaN
+  120.0       NaN    0.0008       NaN       NaN   99.4435       NaN
+  120.0       NaN    0.0008       NaN       NaN   99.4435       NaN
+

@@ -1,0 +1,100 @@
+Project:            
+Testsystem:         
+Comment:            NA
+
+KinGUI Version: 1.1
+
+Input Data:         C:\Documents and Settings\jranke\My Documents\R\mkin.BerliOS\R_packages\kinfit\trunk\inst\doc\KinGUI\D_KinGUI.txt
+
+# =================================
+# Results of the kinetic evaluation
+# =================================
+
+# ---------------------------------
+# Initial values
+# ---------------------------------
+                    Initial Value    Lower Bound      Upper Bound      
+        Parent_M(0):   100.0000           0.0000              Inf      
+          Parent_k1:     0.1000           0.0000              Inf      
+          Parent_k2:     0.0100           0.0000              Inf      
+          Parent_tb:     3.0000           0.0000              Inf      
+          Sink_M(0):     0.0000           0.0000              Inf      
+
+# ---------------------------------
+# Chi2 error estimation
+# ---------------------------------
+                          Parent      Sink       All
+  Number of data sets:         9         0         9
+ Number of parameters:         4         0         4
+   Degrees of Freedom:         5         0         5
+
+                          Parent      Sink       All
+
+                 RMSE:    3.4039       NaN    3.4039
+            Chi2Sigma:    2.2876       NaN    2.2876
+             Chi2Err%:    5.7881       NaN    5.7881
+
+# ---------------------------------
+# Parameter estimation
+# ---------------------------------
+
+   Degrees of Freedom:        14
+    Parameter   Estimate   Lower CI   Upper CI     St.Dev   Prob > t
+    Parent_k1     0.1219     0.0502     0.1935     0.0334     0.0013
+    Parent_k2     0.0879     0.0757     0.1001     0.0057   1.7e-010
+    Parent_tb     2.9984     1.1617     4.8350     0.8563     0.0018
+   Parent_FFS     1.0000
+  Parent_M(0)   101.1066    96.3031   105.9101     2.2396
+    Sink_M(0)     0.0000
+
+# ---------------------------------
+# DT50 and DT90 values
+# ---------------------------------
+                       Parent         Sink
+           DT50:       6.7257          NaN
+           DT90:      25.0308          NaN
+  Kinetic model:           hs         sink
+
+# ---------------------------------
+# Additional Statistics
+# ---------------------------------
+# Correlation and R-square of predicted vs. measured data
+               Parent       Sink       All
+       EF:     0.9945        NaN     0.9945
+ R-square:     0.9948        NaN     0.9948
+
+# Correlation matrix of parameters
+                 Parent_k1    Parent_k2    Parent_tb     Parent_M
+    Parent_k1       1.0000       0.0001       0.9101       0.6628
+    Parent_k2       0.0001       1.0000       0.1728       0.0000
+    Parent_tb       0.9101       0.1728       1.0000       0.4166
+     Parent_M       0.6628       0.0000       0.4166       1.0000
+
+# ---------------------------------
+# Measured vs. predicted values
+# ---------------------------------
+   Time            Compartment Parent              Compartment Sink
+         measured predicted  residual  measured predicted  residual
+    0.0   99.4600  101.1066   -1.6466       NaN    0.0000       NaN
+    0.0  102.0400  101.1066    0.9334       NaN    0.0000       NaN
+    1.0   93.5000   89.5056    3.9944       NaN   11.6010       NaN
+    1.0   92.5000   89.5056    2.9944       NaN   11.6010       NaN
+    3.0   63.2300   70.1481   -6.9181       NaN   30.9585       NaN
+    3.0   68.9900   70.1481   -1.1581       NaN   30.9585       NaN
+    7.0   52.3200   49.3489    2.9711       NaN   51.7577       NaN
+    7.0   55.1300   49.3489    5.7811       NaN   51.7577       NaN
+   14.0   27.2700   26.6677    0.6023       NaN   74.4389       NaN
+   14.0   26.6400   26.6677   -0.0277       NaN   74.4389       NaN
+   21.0   11.5000   14.4109   -2.9109       NaN   86.6956       NaN
+   21.0   11.6400   14.4109   -2.7709       NaN   86.6956       NaN
+   35.0    2.8500    4.2083   -1.3583       NaN   96.8983       NaN
+   35.0    2.9100    4.2083   -1.2983       NaN   96.8983       NaN
+   50.0    0.6900    1.1255   -0.4355       NaN   99.9811       NaN
+   50.0    0.6300    1.1255   -0.4955       NaN   99.9811       NaN
+   75.0    0.0500    0.1249   -0.0749       NaN  100.9816       NaN
+   75.0    0.0600    0.1249   -0.0649       NaN  100.9816       NaN
+  100.0       NaN    0.0139       NaN       NaN  101.0927       NaN
+  100.0       NaN    0.0139       NaN       NaN  101.0927       NaN
+  120.0       NaN    0.0024       NaN       NaN  101.1042       NaN
+  120.0       NaN    0.0024       NaN       NaN  101.1042       NaN
+

@@ -1,0 +1,86 @@
+Project:            
+Testsystem:         
+Comment:            NA
+
+KinGUI Version: 1.1
+
+Input Data:         C:\Documents and Settings\jranke\My Documents\R\mkin.BerliOS\R_packages\kinfit\trunk\inst\doc\KinGUI\B_KinGUI.txt
+
+# =================================
+# Results of the kinetic evaluation
+# =================================
+
+# ---------------------------------
+# Initial values
+# ---------------------------------
+                    Initial Value    Lower Bound      Upper Bound      
+        Parent_M(0):   100.0000           0.0000              Inf      
+          Parent_k1:     0.1000           0.0000              Inf      
+          Parent_k2:     0.0100           0.0000              Inf      
+           Parent_g:     0.5000           0.0000              Inf      
+          Sink_M(0):     0.0000           0.0000              Inf      
+
+# ---------------------------------
+# Chi2 error estimation
+# ---------------------------------
+                          Parent      Sink       All
+  Number of data sets:         8         0         8
+ Number of parameters:         4         0         4
+   Degrees of Freedom:         4         0         4
+
+                          Parent      Sink       All
+
+                 RMSE:    2.6723       NaN    2.6723
+            Chi2Sigma:    1.7351       NaN    1.7351
+             Chi2Err%:    4.9554       NaN    4.9554
+
+# ---------------------------------
+# Parameter estimation
+# ---------------------------------
+
+   Degrees of Freedom:         4
+    Parameter   Estimate   Lower CI   Upper CI     St.Dev   Prob > t
+    Parent_k1     0.1024    -0.4603     0.6650     0.2027     0.3200
+    Parent_k2     0.0580    -0.2942     0.4102     0.1268     0.3355
+     Parent_g     0.5406    -9.3329    10.4141     3.5562     0.4433
+   Parent_FFS     1.0000
+  Parent_M(0)    99.6744    92.5981   106.7508     2.5487
+    Sink_M(0)     0.0000
+
+# ---------------------------------
+# DT50 and DT90 values
+# ---------------------------------
+                       Parent         Sink
+           DT50:       8.6786          NaN
+           DT90:      30.8006          NaN
+  Kinetic model:         dfop         sink
+
+# ---------------------------------
+# Additional Statistics
+# ---------------------------------
+# Correlation and R-square of predicted vs. measured data
+               Parent       Sink       All
+       EF:     0.9973        NaN     0.9973
+ R-square:     0.9973        NaN     0.9973
+
+# Correlation matrix of parameters
+                 Parent_k1    Parent_k2     Parent_g     Parent_M
+    Parent_k1       1.0000       0.9674      -0.9908       0.3017
+    Parent_k2       0.9674       1.0000      -0.9919       0.2094
+     Parent_g      -0.9908      -0.9919       1.0000      -0.2409
+     Parent_M       0.3017       0.2094      -0.2409       1.0000
+
+# ---------------------------------
+# Measured vs. predicted values
+# ---------------------------------
+   Time            Compartment Parent              Compartment Sink
+         measured predicted  residual  measured predicted  residual
+    0.0   98.6200   99.6744   -1.0544       NaN    0.0000       NaN
+    3.0   81.4300   78.1107    3.3193       NaN   21.5637       NaN
+    7.0   53.1800   56.8237   -3.6437       NaN   42.8507       NaN
+   14.0   34.8900   33.1764    1.7136       NaN   66.4981       NaN
+   30.0   10.0900   10.5286   -0.4386       NaN   89.1458       NaN
+   62.0    1.5000    1.3480    0.1520       NaN   98.3264       NaN
+   90.0    0.3300    0.2522    0.0778       NaN   99.4222       NaN
+  118.0    0.0800    0.0489    0.0311       NaN   99.6255       NaN
+

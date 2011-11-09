@@ -1,0 +1,83 @@
+Project:            
+Testsystem:         
+Comment:            NA
+
+KinGUI Version: 1.1
+
+Input Data:         C:\Documents and Settings\jranke\My Documents\R\mkin.BerliOS\R_packages\kinfit\trunk\inst\doc\KinGUI\B_KinGUI.txt
+
+# =================================
+# Results of the kinetic evaluation
+# =================================
+
+# ---------------------------------
+# Initial values
+# ---------------------------------
+                    Initial Value    Lower Bound      Upper Bound      
+        Parent_M(0):   100.0000           0.0000              Inf      
+       Parent_alpha:     1.0000           0.0000              Inf      
+        Parent_beta:    10.0000           0.0000              Inf      
+          Sink_M(0):     0.0000           0.0000              Inf      
+
+# ---------------------------------
+# Chi2 error estimation
+# ---------------------------------
+                          Parent      Sink       All
+  Number of data sets:         8         0         8
+ Number of parameters:         3         0         3
+   Degrees of Freedom:         5         0         5
+
+                          Parent      Sink       All
+
+                 RMSE:    2.4135       NaN    2.4135
+            Chi2Sigma:    1.6220       NaN    1.6220
+             Chi2Err%:    4.6322       NaN    4.6322
+
+# ---------------------------------
+# Parameter estimation
+# ---------------------------------
+
+   Degrees of Freedom:         5
+    Parameter   Estimate   Lower CI   Upper CI     St.Dev   Prob > t
+ Parent_alpha     8.5369   -15.5894    32.6631     9.3855     0.2024
+  Parent_beta   101.4875  -206.6864   409.6614   119.8849     0.2179
+   Parent_FFS     1.0000
+  Parent_M(0)    99.9273    94.1784   105.6762     2.2364
+    Sink_M(0)     0.0000
+
+# ---------------------------------
+# DT50 and DT90 values
+# ---------------------------------
+                       Parent         Sink
+           DT50:       8.5840          NaN
+           DT90:      31.4206          NaN
+  Kinetic model:         fomc         sink
+
+# ---------------------------------
+# Additional Statistics
+# ---------------------------------
+# Correlation and R-square of predicted vs. measured data
+               Parent       Sink       All
+       EF:     0.9973        NaN     0.9973
+ R-square:     0.9973        NaN     0.9973
+
+# Correlation matrix of parameters
+              Parent_alpha  Parent_beta     Parent_M
+ Parent_alpha       1.0000       0.9989      -0.3574
+  Parent_beta       0.9989       1.0000      -0.3825
+     Parent_M      -0.3574      -0.3825       1.0000
+
+# ---------------------------------
+# Measured vs. predicted values
+# ---------------------------------
+   Time            Compartment Parent              Compartment Sink
+         measured predicted  residual  measured predicted  residual
+    0.0   98.6200   99.9273   -1.3073       NaN    0.0000       NaN
+    3.0   81.4300   77.9251    3.5049       NaN   22.0022       NaN
+    7.0   53.1800   56.5452   -3.3652       NaN   43.3822       NaN
+   14.0   34.8900   33.1569    1.7331       NaN   66.7704       NaN
+   30.0   10.0900   10.9528   -0.8628       NaN   88.9745       NaN
+   62.0    1.5000    1.7058   -0.2058       NaN   98.2215       NaN
+   90.0    0.3300    0.4424   -0.1124       NaN   99.4849       NaN
+  118.0    0.0800    0.1380   -0.0580       NaN   99.7893       NaN
+
