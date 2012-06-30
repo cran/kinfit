@@ -1,0 +1,14 @@
+Version:	1.1
+Project:	
+Testsystem:	
+Comment:	NA
+t	parent
+0	95.6
+3	91.9
+7	86.5
+14	72.9
+28	29.6
+43	10
+56	6.8
+70	3.5
+100	4.2

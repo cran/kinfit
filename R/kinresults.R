@@ -1,4 +1,4 @@
-# $Id: kinresults.R 123 2011-11-01 12:26:41Z jranke $
+# $Id: kinresults.R 124 2011-11-09 10:58:27Z jranke $
 
 # Copyright (C) 2008-2011 Johannes Ranke
 # Contact: mkin-devel@lists.berlios.de
