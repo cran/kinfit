@@ -1,6 +1,6 @@
 # $Id: kinplot.R 117 2011-06-14 08:52:14Z kati $
 
-# Copyright (C) 2008-2010 Johannes Ranke
+# Copyright (C) 2008-2013 Johannes Ranke
 # Contact: mkin-devel@lists.berlios.de
 
 # This file is part of the R package kinfit
@@ -17,6 +17,8 @@
 
 # You should have received a copy of the GNU General Public License along with
 # this program. If not, see <http://www.gnu.org/licenses/>
+
+if(getRversion() >= '2.15.1') utils::globalVariables("x")
 
 kinplot <- function(kinobject, 
 	main = "",

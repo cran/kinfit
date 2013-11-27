@@ -31,5 +31,5 @@ kinresplot <- function(kinobject, kinmodel,
 		ylab = ylab,
 		ylim = c( -1.2 * maxabs, 1.2 * maxabs))
   abline(h=0, lty=2)
-	title(paste("Residuals of", kinmodel, "fit"), font.main = 1)
+	title(paste("Residuals of", kinmodel, "fit"))
 }

@@ -19,13 +19,11 @@
 # this program. If not, see <http://www.gnu.org/licenses/>
 
 kinobject <- function(parent, type, system, 
-        layers = NA, sampling_times = NA)
+        layers = NA, sampling_times = NA, replicates = 1)
 {
         kinobject <- list(parent = parent, 
                 type = type, system = system)
         if (!is.na(layers[1])) kinobject$layers = layers
-        if (!is.na(sampling_times[1])) {
-                kinobject$sampling_times = layers
-        }
+	kinobject$data <- data.frame(t = rep(sampling_times, each = replicates), parent = NA)
         return(kinobject)
 }

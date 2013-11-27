@@ -8,7 +8,9 @@ Creates a plot of the kinetic fits
 Function to create a plot for a set of fitted models
 }
 \usage{
-kinplot(kinobject, main = "", xlab = "Time [days]", ylab = "Parent [\% of applied radioactivity]", ylim = c("auto", "auto"), lpos = "topright")
+kinplot(kinobject, main = "",
+        xlab = "Time [days]", ylab = "Parent [\% of applied radioactivity]", 
+	ylim = c("auto", "auto"), lpos = "topright")
 }
 \arguments{
   \item{kinobject}{

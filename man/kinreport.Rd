@@ -9,7 +9,8 @@ Function to create a report for a set of fitted models, passing it to the
 console as well as to a file, if specified.
 }
 \usage{
-kinreport(kinobject, file = NA, data = TRUE, R2 = FALSE, vcov = FALSE, endpoint.digits = 1)
+kinreport(kinobject, file = NA, data = TRUE, R2 = FALSE, 
+          vcov = FALSE, endpoint.digits = 1)
 }
 \arguments{
   \item{kinobject}{

@@ -1,0 +1,224 @@
+% $Id: $
+%%\VignetteIndexEntry{Examples for kinetic evaluations using kinfit}
+%%\usepackage{Sweave}
+\documentclass[12pt,a4paper]{article}
+\usepackage{a4wide}
+%%\usepackage[lists,heads]{endfloat}
+\input{header}
+\hypersetup{  
+  pdftitle = {Examples for kinetic evaluations using kinfit},
+  pdfsubject = {Manuscript},
+  pdfauthor = {Johannes Ranke},
+  colorlinks = {true},
+  linkcolor = {blue},
+  citecolor = {blue},
+  urlcolor = {red},
+  hyperindex = {true},
+  linktocpage = {true},
+}
+\SweaveOpts{engine=R, eps=FALSE, keep.source = TRUE}
+<<setup, echo = FALSE, results = hide>>=
+options(prompt = "R> ")
+options(SweaveHooks = list(
+  cex = function() par(cex.lab = 1.3, cex.axis = 1.3)))
+@
+\begin{document}
+\title{Examples for kinetic evaluations using kinfit}
+\author{\textbf{Johannes Ranke} \\[0.5cm]
+%EndAName
+Eurofins Regulatory AG\\
+Weidenweg 15, CH--4310 Rheinfelden, Switzerland\\[0.5cm]
+and\\[0.5cm]
+University of Bremen\\
+}
+\maketitle
+
+%\begin{abstract}
+%\end{abstract}
+
+\thispagestyle{empty} \setcounter{page}{0}
+
+\clearpage
+
+\tableofcontents
+
+\textbf{Key words}: Kinetics, FOCUS, nonlinear optimisation
+
+\section{Kinetic evaluations for parent compounds}
+\label{intro}
+
+These examples are also evaluated in a parallel vignette of the
+\Rpackage{mkin} package \citep{pkg:mkin}. The datasets are from Appendix 3,
+of the FOCUS kinetics report \citep{FOCUS2006, FOCUSkinetics2011}.
+
+\subsection{Laboratory Data L1}
+
+The following code defines an object containing the example dataset L1 from the
+FOCUS kinetics report, p. 284
+
+<<FOCUS_2006_L1_data, echo=TRUE, eval=TRUE>>=
+library("kinfit")
+FOCUS_2006_L1 = kinobject("Parent", "Degradation data", "")
+FOCUS_2006_L1$data = data.frame(
+  t = rep(c(0, 1, 2, 3, 5, 7, 14, 21, 30), each = 2),
+  parent = c(88.3, 91.4, 85.6, 84.5, 78.9, 77.6, 
+             72.0, 71.9, 50.3, 59.4, 47.0, 45.1,
+             27.7, 27.3, 10.0, 10.4, 2.9, 4.0))
+@
+
+The following two lines fit the model and produce the summary report
+of the model fit. This covers the numerical analyses given in the 
+FOCUS report.
+
+<<L1, echo=TRUE>>=
+FOCUS_2006_L1$fits <- kinfit(FOCUS_2006_L1$data, 
+  kinmodels = c("SFO", "FOMC", "DFOP"))
+FOCUS_2006_L1$results <- kinresults(FOCUS_2006_L1$fits)
+kinreport(FOCUS_2006_L1)
+@
+
+Obviously, the FOMC model and the DFOP model were not fitted. As discussed in the
+kinfit vignette of this package, this occurs when the SFO model fits very well.
+
+We can try to force the FOMC fit using the parameters obtained using mkin.
+
+<<L1_2, echo=TRUE>>=
+FOCUS_2006_L1$fits <- kinfit(FOCUS_2006_L1$data, 
+  kinmodels = c("SFO", "FOMC", "DFOP"),
+  start.FOMC = list(parent.0 = 92.47, alpha = 1.35e11, beta = 1.41e12))
+FOCUS_2006_L1$results <- kinresults(FOCUS_2006_L1$fits)
+kinreport(FOCUS_2006_L1)
+@
+
+It still does not converge. As discussed in the kinfit vignette, the FOMC model usually
+is not returned by kinfit when the SFO model fits very well. This should be seen as 
+a feature, not a bug, as the FOMC model is ill-defined in such cases.
+
+A plot of the fit is obtained with the kinplot function.
+
+<<L1_SFO_plot, fig=TRUE, echo=TRUE>>=
+kinplot(FOCUS_2006_L1, ylab = "Observed")
+@
+
+The residual plot can be easily obtained by
+
+<<L1_SFO_residuals, fig=TRUE, echo=TRUE>>=
+kinresplot(FOCUS_2006_L1, "SFO", ylab = "Observed")
+@
+
+\subsection{Laboratory Data L2}
+
+The following code defines example dataset L2 from the FOCUS kinetics
+report, p. 287
+
+<<FOCUS_2006_L2_data, echo=TRUE, eval=TRUE>>=
+FOCUS_2006_L2 = kinobject("Parent", "Degradation data", "")
+FOCUS_2006_L2$data = data.frame(
+  t = rep(c(0, 1, 3, 7, 14, 28), each = 2),
+  parent = c(96.1, 91.8, 41.4, 38.7,
+             19.3, 22.3, 4.6, 4.6,
+             2.6, 1.2, 0.3, 0.6))
+@
+
+Again, the SFO, FOMC and DFOP models are fitted and a report is printed.
+
+<<L2, echo=TRUE>>=
+FOCUS_2006_L2$fits <- kinfit(FOCUS_2006_L2$data, 
+  kinmodels = c("SFO", "FOMC", "DFOP"))
+FOCUS_2006_L2$results <- kinresults(FOCUS_2006_L2$fits)
+kinreport(FOCUS_2006_L2)
+@
+
+Here, only the DFOP did not converge using default parameters. The DFOP fit can be 
+obtained using refined starting parameters:
+
+<<L2_2, echo=TRUE>>=
+FOCUS_2006_L2$fits <- kinfit(FOCUS_2006_L2$data, 
+  kinmodels = c("SFO", "FOMC", "DFOP"),
+  start.DFOP = list(parent.0 = 94, g = 0.4, k1 = 142, k2 = 0.34))
+FOCUS_2006_L2$results <- kinresults(FOCUS_2006_L2$fits)
+kinreport(FOCUS_2006_L2)
+@
+
+Again, even with starting parameters very close to the optimum obtained using mkin, 
+there is no convergence with kinfit. However, when looking at the fit obtained using
+mkin plotted in the mkin vignette, it is clear that the point where the break point 
+of the curve, caused by the large difference between k1 and k2, is not clearly defined
+by the data. Therefore, it should be seen as a desirable feature of the
+underlying nls() function that no solution is returned.
+
+Comparison of $\chi^2$ error levels of the two models shows that the FOMC model allows
+for a better representation of the data.  This is also obvious from the plot
+of the fits.
+
+<<L2_plot, fig=TRUE, echo=TRUE>>=
+kinplot(FOCUS_2006_L2, ylab = "Observed")
+@
+
+Residual plots are obtained using kinresplot.
+
+<<L2_resplot, fig=TRUE, echo=TRUE>>=
+par(mfrow=c(2,1))
+kinresplot(FOCUS_2006_L2, "SFO", ylab = "Observed")
+kinresplot(FOCUS_2006_L2, "FOMC", ylab = "Observed")
+@
+
+\subsection{Laboratory Data L3}
+
+The following code defines example dataset L3 from the FOCUS kinetics
+report, p. 290 and attempts to fit the SFO, FOMC and DFOP models.
+
+<<FOCUS_2006_L3, echo=TRUE, eval=TRUE>>=
+FOCUS_2006_L3 = kinobject("Parent", "Degradation data", "")
+FOCUS_2006_L3$data = data.frame(
+  t = c(0, 3, 7, 14, 30, 60, 91, 120),
+  parent = c(97.8, 60, 51, 43, 35, 22, 15, 12))
+FOCUS_2006_L3$fits <- kinfit(FOCUS_2006_L3$data, 
+  kinmodels = c("SFO", "FOMC", "DFOP"))
+FOCUS_2006_L3$results <- kinresults(FOCUS_2006_L3$fits)
+kinreport(FOCUS_2006_L3)
+@
+
+In this case, the FOMC model does not return a solution using kinfit. Trying with 
+closer starting parameters gives success this time.
+
+<<FOCUS_2006_L3_2, echo=TRUE, eval=TRUE, fig=TRUE>>=
+FOCUS_2006_L3$fits <- kinfit(FOCUS_2006_L3$data, 
+  kinmodels = c("SFO", "FOMC", "DFOP"),
+  start.FOMC = list(parent.0 = 100, alpha = 0.5, beta = 2))
+FOCUS_2006_L3$results <- kinresults(FOCUS_2006_L3$fits)
+kinreport(FOCUS_2006_L3)
+kinplot(FOCUS_2006_L3, ylab = "Observed")
+@
+
+Based on the $\chi^2$ error level criterion and the visual analysis of the
+fits, the DFOP model would be the best-fit model of choice for laboratory data
+L3.
+
+\subsection{Laboratory Data L4}
+
+The following code defines example dataset L4 from the FOCUS kinetics
+report, p. 293 and attempts to fit the SFO, FOMC and DFOP models.
+
+<<FOCUS_2006_L4, echo=TRUE, eval=TRUE, fig=TRUE>>=
+FOCUS_2006_L4 = kinobject("Parent", "Degradation data", "")
+FOCUS_2006_L4$data = data.frame(
+  t = c(0, 3, 7, 14, 30, 60, 91, 120),
+  parent = c(96.6, 96.3, 94.3, 88.8, 74.9, 59.9, 53.5, 49.0))
+FOCUS_2006_L4$fits <- kinfit(FOCUS_2006_L4$data, 
+  kinmodels = c("SFO", "FOMC", "DFOP"))
+FOCUS_2006_L4$results <- kinresults(FOCUS_2006_L4$fits)
+kinreport(FOCUS_2006_L4)
+kinplot(FOCUS_2006_L4, ylab = "Observed")
+@
+
+Although the $\chi^2$ error level is slightly smaller for the DFOP model and also
+for the FOMC model, the differences are small, and the SFO model may appear to
+be a suitable choice. The better fit of the DFOP model depends very much on the
+last three data points.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
+% vim: set foldmethod=syntax:
