@@ -1,8 +1,7 @@
 
-R version 2.14.0 (2011-10-31)
-Copyright (C) 2011 The R Foundation for Statistical Computing
-ISBN 3-900051-07-0
-Platform: i386-pc-mingw32/i386 (32-bit)
+R version 3.1.2 (2014-10-31) -- "Pumpkin Helmet"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -78,10 +77,10 @@ DFOP       9  5     23.589   4.3627 0.026621 0.99936
        DT50   DT90
 SFO  7.0776 23.511
 FOMC 6.9350 24.044
-> print(kinresults(fits)$stats, digits=5)
-     n.times df mean.means    RSS  err.min      R2
-SFO        9  7     39.523 207.63 0.064524 0.99194
-FOMC       9  6     39.523 205.45 0.067792 0.99202
+> print(kinresults(fits)$stats, digits=3)
+     n.times df mean.means RSS err.min    R2
+SFO        9  7       39.5 208  0.0645 0.992
+FOMC       9  6       39.5 205  0.0678 0.992
 > 
 > data(FOCUS_2006_E)
 > fits <- kinfit(FOCUS_2006_E, kinmodels = c("SFO", "FOMC", "DFOP"))
@@ -96,3 +95,6 @@ SFO        9  7     23.589 196.5334 0.158440 0.97136
 FOMC       9  6     23.589  31.0509 0.066568 0.99548
 DFOP       9  5     23.589   4.3627 0.026621 0.99936
 > 
+> proc.time()
+   user  system elapsed 
+  0.992   0.064   1.113 

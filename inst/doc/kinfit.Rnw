@@ -597,7 +597,7 @@ For datasets B and C, the \Rpackage{kinfit} function produces results
 which are very close to the median of the results obtained by the 
 other packages.
 
-\subsection{Dual First Order in Parallel Model}
+\subsection{Double First Order in Parallel Model}
 
 <<DFOP, echo = FALSE>>=
 data("FOCUS_2006_DFOP_ref_A_to_B", package = "kinfit")

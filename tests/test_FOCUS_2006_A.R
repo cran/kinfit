@@ -37,7 +37,7 @@ print(kinresults(fits)$stats, digits=5)
 data(FOCUS_2006_D)
 fits <- kinfit(FOCUS_2006_D, kinmodels = c("SFO", "FOMC"))
 print(kinresults(fits)$results, digits=5)
-print(kinresults(fits)$stats, digits=5)
+print(kinresults(fits)$stats, digits=3)
 
 data(FOCUS_2006_E)
 fits <- kinfit(FOCUS_2006_E, kinmodels = c("SFO", "FOMC", "DFOP"))
