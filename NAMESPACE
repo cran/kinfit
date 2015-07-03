@@ -3,3 +3,7 @@
 
 # Export all names
 exportPattern(".")
+
+import("graphics")
+import("stats")
+importFrom("utils", "packageVersion", "write.table")
